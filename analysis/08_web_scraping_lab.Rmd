@@ -1,0 +1,73 @@
+---
+title: "APIs and Web Scraping Lab"
+date: "`r Sys.Date()`"
+author: "YOUR NAME HERE"
+output: html_document
+urlcolor: "blue"
+params: 
+  solutions: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = params$solutions, 
+                      eval = params$solutions,
+                      fig.height = 3, 
+                      fig.width  = 6,
+                      fig.align  = "center")
+ggplot2::theme_set(ggplot2::theme_bw())
+```
+
+# Learning Objectives
+
+- Obtain data from an API.
+- Scrape data from the web.
+- Intense data cleaning.
+
+# NFL Arrests
+
+Consider the API for arrests of NFL players: <http://nflarrest.com/api/>
+
+Hint: Don't forget that the `url` argument should start with http. Use the urls
+in the example queries in the help-page as guides.
+
+1. Download the arrest counts for the Browns from 2001 to 2018.
+
+2. Clean the data. Your data frame should look like this (I just made the
+   day in the `Date` variable be on the first of the month for all dates):
+
+3. Plot the cumulative sum by date. Your plot should look like this 
+   (use `geom_step()`):
+
+4. There have been 29 players with at least 3 arrests since 2000. Get their
+   names. You should get:
+
+5. Clean the player data from part 4. Your data frame should look like this:
+
+# Film Remakes
+
+Consider the list of film remakes from Wikipedia: 
+<https://en.wikipedia.org/wiki/List_of_film_remakes_(A-M)> and
+<https://en.wikipedia.org/wiki/List_of_film_remakes_(N-Z)>
+
+1. Download the html file and save it as a variable. You can also load the
+   "remakes_1.html" and "remakes_2.html" files in the data folder.
+
+2. Extract the "table.wikitable" elements from both files.
+  
+3. Now obtain a single list of all of the table elements.
+
+4. Create a single data frame with two columns --- `Remakes` and `Original version`.
+
+5. Create a data frame that contains the year of the remake, the year of the
+   original, and the name of the original. Note that there are many films with
+   multiple remakes.
+   
+    Your final data frame should look like this:
+
+6. There are two films remade in the same year as the original version. What
+   were they?
+   
+7. Find the 5 movies that were remade the most number of times. You should get:
+
+8. Plot a step function for these movies by year. Your final plot should look
+   like this:
