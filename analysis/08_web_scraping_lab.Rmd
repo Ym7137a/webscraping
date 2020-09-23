@@ -23,25 +23,39 @@ ggplot2::theme_set(ggplot2::theme_bw())
 - Scrape data from the web.
 - Intense data cleaning.
 
-# NFL Arrests
+# Semantic Scholar
 
-Consider the API for arrests of NFL players: <http://nflarrest.com/api/>
+[Semantic Scholar](https://www.semanticscholar.org/) is like Google Scholar, but they claim to return more useful connections between journal articles and authors. Recently, I've found myself using both, whereas before I spent most of my time searching for articles on Google Scholar.
 
-Hint: Don't forget that the `url` argument should start with http. Use the urls
-in the example queries in the help-page as guides.
+Semantic Scholar has a really nice API to practice on: <https://api.semanticscholar.org/>
 
-1. Download the arrest counts for the Browns from 2001 to 2018.
+I actually used this API in real-life when I was preparing my reappointment files to check out and plot citation counts. Let's try and reproduce what I did.
 
-2. Clean the data. Your data frame should look like this (I just made the
-   day in the `Date` variable be on the first of the month for all dates):
+Just like Google Scholar, each author as their own page. Here is mine: <https://www.semanticscholar.org/author/David-Gerard/145899953>
 
-3. Plot the cumulative sum by date. Your plot should look like this 
-   (use `geom_step()`):
+1. Consider the following vector of [DOIs](https://en.wikipedia.org/wiki/Digital_object_identifier) of my publications:
 
-4. There have been 29 players with at least 3 arrests since 2000. Get their
-   names. You should get:
+    ```{r, echo = TRUE, eval = TRUE}
+    gerard_dois <- c("10.1186/s12859-020-3450-9",
+                     "10.1093/bioinformatics/btz852",
+                     "10.1080/07391102.2019.1679666",
+                     "10.1093/biostatistics/kxy029",
+                     "10.1534/genetics.118.301468",
+                     "10.1214/17-EJS1330",
+                     "10.5705/ss.202018.0345",
+                     "10.1016/j.laa.2016.04.033",
+                     "10.1016/j.jmva.2015.01.020",
+                     "10.1007/s11084-013-9331-8",
+                     "10.1186/1471-2148-11-291")
+    ```
 
-5. Clean the player data from part 4. Your data frame should look like this:
+    Use the API to download the paper information for each of my publications listed above. Save the content of this information as a list. So, for example, each element of this list is itself a list with the following elements:
+
+2. Tidy these data. Extract the DOI's, title, and authors from each paper. Also, for each year, calculate the number of citations each paper received. So your final data frame should look like this:
+
+3. Plot the cumulative number of citations over time, aggregating over all papers. Your plot should look like this:
+
+4. For each paper, make a plot of cumulative summations (use a for-loop). Your plots should look like this:
 
 # Film Remakes
 
@@ -53,7 +67,7 @@ Consider the list of film remakes from Wikipedia:
    "remakes_1.html" and "remakes_2.html" files in the data folder.
 
 2. Extract the "table.wikitable" elements from both files.
-  
+
 3. Now obtain a single list of all of the table elements.
 
 4. Create a single data frame with two columns --- `Remakes` and `Original version`.
@@ -66,7 +80,7 @@ Consider the list of film remakes from Wikipedia:
 
 6. There are two films remade in the same year as the original version. What
    were they?
-   
+
 7. Find the 5 movies that were remade the most number of times. You should get:
 
 8. Plot a step function for these movies by year. Your final plot should look
